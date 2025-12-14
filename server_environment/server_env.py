@@ -122,7 +122,7 @@ def _load_config_from_server_env_files(config_p):
 
 
 def _load_config_from_rcfile(config_p):
-    config_p.read(system_base_config.rcfile)
+    config_p.read(system_base_config['config'])
     config_p.remove_section("options")
 
 
@@ -271,7 +271,7 @@ class ServerConfiguration(models.TransientModel):
         arch = '<form string="Configuration Form">' '<notebook colspan="4">'
 
         # Odoo server configuration
-        rcfile = system_base_config.rcfile
+        rcfile = system_base_config['config']
         items = cls._get_base_cols()
         arch += '<page string="Odoo">'
         arch += f'<separator string="{_escape(rcfile)}" colspan="4"/>'
