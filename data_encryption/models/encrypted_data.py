@@ -29,14 +29,10 @@ class EncryptedData(models.Model):
     )
     encrypted_data = fields.Binary(attachment=False)
 
-    _sql_constraints = [
-        (
-            "name_environment_uniq",
-            "unique (name, environment)",
-            "You can not store multiple encrypted data for the same record and \
-          environment",
-        )
-    ]
+    _check_unique_name_per_environment = models.Constraint(
+        "UNIQUE(name, environment)",
+        "You can not store multiple encrypted data for the same record and environment",
+    )
 
     def _decrypt_data(self, env):
         self.ensure_one()
